@@ -6,7 +6,8 @@ on:
     inputs:
       release-tag:
         description: "Release tag to test"
-        required: true
+        required: false
+        default: v1
         type: string
   push:
     tags:

@@ -21,6 +21,7 @@ jobs:
     permissions:
       id-token: write # For signing.
       contents: write # For asset uploads.
+      packages: write
       actions: read # For the entrypoint.
     uses: laurentsimon/slsa-delegated-tool/.github/workflows/tool1_slsa3.yml@main
     with:

@@ -1,0 +1,28 @@
+name: delegate release project
+
+on:
+  # For manual tests.
+  workflow_dispatch:
+    inputs:
+      release-tag:
+        description: "Release tag to test"
+        required: true
+        type: string
+  push:
+    tags:
+      - "*" # triggers only if push new tag version, like `0.8.4` or else
+
+permissions: read-all
+
+jobs:
+  # release.
+  release:
+    permissions:
+      id-token: write # For signing.
+      contents: write # For asset uploads.
+      actions: read # For the entrypoint.
+    uses: laurentsimon/slsa-delegated-tool/.github/workflows/tool1_slsa3.yml@main
+    with:
+      name1: value1
+      name2: value2
+      private-repository: true

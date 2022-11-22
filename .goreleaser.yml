@@ -1,0 +1,73 @@
+project_name: example
+env:
+  - GO111MODULE=on
+  # https://stackoverflow.com/a/62821358/19407
+  - CGO_ENABLED=0
+before:
+  hooks:
+    - go mod download
+gomod:
+  proxy: true
+builds:
+- id: linux
+  binary: xeample-linux-{{ .Arch }}
+  flags:
+      - -trimpath
+      - -tags=netgo
+  mod_timestamp: '{{ .CommitTimestamp }}'
+  goos:
+    - linux
+  goarch:
+    - amd64
+    - arm64
+    - 386
+    - arm
+  ldflags:
+    -
+
+- id: darwin
+  binary: example-darwin-{{ .Arch }}
+  flags:
+      - -trimpath
+      - -tags=netgo
+  mod_timestamp: '{{ .CommitTimestamp }}'
+  goos:
+    - darwin
+  goarch:
+    - amd64
+    - arm64
+  ldflags:
+    - 
+
+- id: windows
+  binary: example-windows-{{ .Arch }}
+  flags:
+      - -trimpath
+      - -tags=netgo
+  mod_timestamp: '{{ .CommitTimestamp }}'
+  goos:
+    - windows
+  goarch:
+    - amd64
+    - 386
+    - arm64
+    - arm
+  ldflags:
+    - -buildmode=exe
+
+checksum:
+  # Algorithm to be used.
+  # Accepted options are sha256, sha512, sha1, crc32, md5, sha224 and sha384.
+  # Default is sha256.
+  name_template: "{{ .ProjectName }}_checksums.txt"
+
+snapshot:
+  name_template: SNAPSHOT-{{ .ShortCommit }}
+changelog:
+  # Set it to true if you wish to skip the changelog generation.
+  # This may result in an empty release notes on GitHub/GitLab/Gitea.
+  skip: false
+
+release:
+  footer: |
+    ### Thanks for all contributors!

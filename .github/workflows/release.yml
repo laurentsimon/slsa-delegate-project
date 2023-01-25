@@ -29,8 +29,8 @@ jobs:
       name2: value2
       private-repository: true
     secrets:
-      secret1: "secret1-ehiecincivvjenvrvbrv"
-      secret2: "secret2-ouxefnwiauhfcurifnerfc"
+      secret1: "oneehiecincivvjenvrvbrv"
+      secret2: "twoouxefnwiauhfcurifnerfc"
 
   # test output
   debug:

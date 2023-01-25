@@ -29,8 +29,8 @@ jobs:
       name2: value2
       private-repository: true
     secrets:
-      secret1: "oneehiecincivvjenvrvbrv"
-      secret2: "twoouxefnwiauhfcurifnerfc"
+      secret1: ${{ secrets.SECRET1 }}
+      secret2: ${{ secrets.SECRET2 }}
 
   # test output
   debug:

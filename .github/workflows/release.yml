@@ -28,3 +28,20 @@ jobs:
       name1: value1
       name2: value2
       private-repository: true
+    secrets:
+      secret1: "secret1-ehiecincivvjenvrvbrv"
+      secret2: "secret2-ouxefnwiauhfcurifnerfc"
+
+  # test output
+  debug:
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          SOME_OUTPUT: ${{ needs.release.outputs.some-output }}
+          OTHER_OUTPUT: ${{ needs.release.outputs.other-output }}
+        run: |
+          #TODO: test with json
+          # TODO: verify
+          echo "SOME_OUTPUT: $SOME_OUTPUT"
+          echo "OTHER_OUTPUT: $OTHER_OUTPUT"

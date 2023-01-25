@@ -28,9 +28,9 @@ jobs:
       name1: value1
       name2: value2
       private-repository: true
-    secrets:
-      secret1: ${{ secrets.SECRET1 }}
-      secret2: ${{ secrets.SECRET2 }}
+    # secrets:
+    #   secret1: ${{ secrets.SECRET1 }}
+    #   secret2: ${{ secrets.SECRET2 }}
 
   # test output
   debug:

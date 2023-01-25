@@ -40,8 +40,11 @@ jobs:
       - env:
           SOME_OUTPUT: ${{ needs.release.outputs.some-output }}
           OTHER_OUTPUT: ${{ needs.release.outputs.other-output }}
+          ATTESTATION_NAME: ${{ needs.release.outputs.attestations-download-name }}
         run: |
           #TODO: test with json
           # TODO: verify
           echo "SOME_OUTPUT: $SOME_OUTPUT"
           echo "OTHER_OUTPUT: $OTHER_OUTPUT"
+
+          echo "ATTESTATION_NAME: $ATTESTATION_NAME"

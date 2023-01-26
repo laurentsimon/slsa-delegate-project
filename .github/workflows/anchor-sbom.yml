@@ -1,0 +1,43 @@
+name: delegate release project
+
+on:
+  # For manual tests.
+  workflow_dispatch:
+    inputs:
+      release-tag:
+        description: "Release tag to test"
+        required: false
+        default: v1
+        type: string
+  push:
+    tags:
+      - "*" # triggers only if push new tag version, like `0.8.4` or else
+
+permissions: read-all
+
+jobs:
+  # release.
+  release:
+    permissions:
+      id-token: write # For signing.
+      contents: write # For asset uploads.
+      packages: write
+      actions: read # For the entrypoint.
+    uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@main
+
+  # test output
+  # debug:
+  #   needs: [release]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - env:
+  #         SOME_OUTPUT: ${{ needs.release.outputs.some-output }}
+  #         OTHER_OUTPUT: ${{ needs.release.outputs.other-output }}
+  #         ATTESTATION_NAME: ${{ needs.release.outputs.attestations-download-name }}
+  #       run: |
+  #         #TODO: test with json
+  #         # TODO: verify
+  #         echo "SOME_OUTPUT: $SOME_OUTPUT"
+  #         echo "OTHER_OUTPUT: $OTHER_OUTPUT"
+
+  #         echo "ATTESTATION_NAME: $ATTESTATION_NAME"

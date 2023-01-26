@@ -1,4 +1,4 @@
-name: delegate release project
+name: sbom releaser project
 
 on:
   # For manual tests.

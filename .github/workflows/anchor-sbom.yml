@@ -18,8 +18,10 @@ permissions: read-all
 jobs:
   # TODO: build using SLSA compliant builder
   build:
-    runs-on: ubuntu-latest
+    outputs:
+      file: ${{ steps.file.outputs.name }}
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -30,9 +32,14 @@ jobs:
         run: |
           version=$(echo "$TAG" | cut -f3 -d '/')
           gh release upload "$version" ./example
+      - name: Artifact name
+        id: file
+        run: echo "name=example" >> $GITHUB_OUTPUT
+          
   
   # sbom.
   sbom:
+    needs: [build]
     permissions:
       id-token: write # For signing.
       contents: write # For asset uploads.
@@ -40,7 +47,9 @@ jobs:
       actions: read # For the entrypoint.
     uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@feat/slsa-trw
     with:
-      file: "example"
+      # NOTE: file is empty on workflow_dispatch, and the SBOM
+      # will use repository source code instead of the binary.
+      file: ${{ needs.build.outputs.file }}
       artifact-name: "example.spdx.sbom"
 
   # test output

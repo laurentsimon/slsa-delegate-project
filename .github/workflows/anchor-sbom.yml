@@ -39,7 +39,7 @@ jobs:
         run: echo "name=example" >> $GITHUB_OUTPUT
           
   
-  # sbom.
+  # SLSA-3 compliant SBOM builder.
   sbom:
     needs: [build]
     # Always run, even when the build job is skipped.

@@ -17,7 +17,20 @@ permissions: read-all
 
 jobs:
   # build:TODO
-
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Upload binary
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref }}
+        run: |
+          version=$(echo "$TAG" | cut -f3 -d '/')
+          gh release upload "$version" ./example
+      
   # release.
   release:
     permissions:
@@ -26,6 +39,8 @@ jobs:
       packages: write
       actions: read # For the entrypoint.
     uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@feat/slsa-trw
+    with:
+      file: "example
 
   # test output
   # debug:

@@ -7,7 +7,7 @@ on:
       release-tag:
         description: "Release tag to test"
         required: false
-        default: v1
+        default: v0.0.1
         type: string
   push:
     tags:

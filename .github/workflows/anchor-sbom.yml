@@ -16,7 +16,7 @@ on:
 permissions: read-all
 
 jobs:
-  # build:TODO
+  # TODO: build using SLSA compliant builder
   build:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.ref, 'refs/tags/')
@@ -41,6 +41,7 @@ jobs:
     uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@feat/slsa-trw
     with:
       file: "example"
+      artifact-name: "example.spdx.sbom"
 
   # test output
   # debug:

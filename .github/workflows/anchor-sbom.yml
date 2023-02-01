@@ -20,7 +20,7 @@ jobs:
   build:
     outputs:
       file: ${{ steps.file.outputs.name }}
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') }} # another comment
     runs-on: ubuntu-latest
     permissions:
       contents: write # Just a comment

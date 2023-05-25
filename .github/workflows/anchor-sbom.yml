@@ -49,8 +49,8 @@ jobs:
       contents: write # For asset uploads.
       packages: write
       actions: read # For the entrypoint.
-    uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@feat/slsa-trw
-    #uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@v0.0.1
+    #uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@feat/slsa-trw
+    uses: laurentsimon/sbom-action/.github/workflows/slsa3.yml@v1.0.0
     with:
       # NOTE: file is empty on workflow_dispatch, and the SBOM
       # will use repository source code instead of the binary.
